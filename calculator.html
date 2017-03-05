@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang=en>
+	<head>
+		<style type="text/css">
+
+		* {
+			font-family: sans-serif;
+		}
+
+		button {
+			width: 156px;
+			height: 100px;
+			margin: .4%;
+			font-size: 60px;
+			position: relative;
+			border-radius: 15%;
+		}
+
+		#display {
+			font-size: 80px;
+			text-align: right;
+			border: solid black 2px;
+			border-radius: 15%;
+			padding: 5px;
+			margin: 7px;
+			margin-bottom: 10px;
+			background-color: #f5f5f5;
+		}
+
+		#keypad {
+			background-color: #6699ff;
+			width: 660px;
+			height: 600px;
+			padding: 10px;
+			border-radius: 5%;
+			margin: auto;	
+			position: auto;	
+			border: grey solid 2px;	
+		}
+
+		#mainCalc {
+			margin: 50px;
+		}
+
+		.operators:focus {
+			border: #00ff00 solid 3px;
+			background-color: #99ffbb;
+		}
+
+		.specialoperators:active {
+			border: #00ff00 solid 3px;
+			background-color: #99ffbb;
+		}
+
+		#labelrow {
+			padding-top: 8px;
+		}
+
+		.label {			
+			display: inline;
+			font-size: 35px;
+		}
+
+		#date {
+			float: right;
+		}
+			
+		</style>
+		
+		<script>
+			
+			number = 0;
+			storage = 0;
+			operator = "";
+
+			function pressKey(key) {
+
+				number = number * 10;
+				number = number + key;
+				tempNumber = number;
+				displayStuff();
+			};
+
+			function pressOperator(op) {
+				operator = op;
+				storage = number;
+				displayStuff();
+				number = 0;
+			};
+
+			function pressClear() {
+				number = 0;
+				storage = 0;
+				displayStuff();
+			};
+
+			function pressEquals() {
+				switch (operator) {
+					case "+":
+						number = storage + number;
+						storage = 0;
+						operator = "";
+						break;
+					
+					case "-":
+						number = storage - number;
+						storage = 0;
+						operator = ""
+						break;
+					
+					case "*":
+						number = storage * number;
+						strorage = 0;
+						operator = "";
+						break;
+					
+					case "/":
+						number = storage / number;
+						storage = 0;
+						operator = "";
+						break;
+					}
+
+						displayStuff();
+						number = 0;
+						
+			};
+
+			function displayStuff() {
+				document.getElementById('display').innerHTML = number;
+				document.getElementById('pressOperator');
+				document.getElementById('PressClear');	
+			};
+			
+		</script>
+		
+	</head>
+		
+	<body>
+
+		<div id="mainCalc">
+			
+			<br>
+
+			<div id="keypad">
+				<div id="display">
+					0
+				</div>
+
+				<div class="row">
+					<button onClick="pressKey(7)">7</button>
+					<button onClick="pressKey(8)">8</button>
+					<button onClick="pressKey(9)">9</button>
+					<button class="operators" onClick="pressOperator('/')">/</button>
+				</div>
+
+				<div class="row">
+					<button onClick="pressKey(4)">4</button>
+					<button onClick="pressKey(5)">5</button>
+					<button onClick="pressKey(6)">6</button>
+					<button class="operators" onClick="pressOperator('*')">x</button>
+
+				</div>
+				
+				<div class="row">
+					<button onClick="pressKey(1)">1</button>
+					<button onClick="pressKey(2)">2</button>
+					<button onClick="pressKey(3)">3</button>
+					<button class="operators" onClick="pressOperator('-')">-</button>
+
+				</div>
+
+				<div class="row">
+					<button class="specialoperators" onClick="pressClear('C')">C</button>
+					<button onClick="pressKey(0)">0</button>
+					<button class="specialoperators" onClick="pressEquals()">=</button>
+					<button class="operators" onClick="pressOperator('+')">+</button>
+				</div>
+
+				<div id="labelrow">
+					<div class="label">Academy Pittsburgh</div>
+					<div class="label" id="date">2016</div>
+				</div>
+
+			</div>
+		</div>
+	</body>
+</html>
